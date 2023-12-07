@@ -23,7 +23,6 @@ class _PostApiScreenState extends State<PostApiScreen> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     bodyController.dispose;
     titleController.dispose();
@@ -37,21 +36,30 @@ class _PostApiScreenState extends State<PostApiScreen> {
         backgroundColor: Colors.red,
       ),
       body: Column(children: [
-        TextField(
-          controller: titleController,
-          onChanged: (value) {
-            userProvider.setTitle = value;
-          },
+        Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: TextField(
+            controller: titleController,
+            onChanged: (value) {
+              userProvider.setTitle = value;
+            },
+          ),
         ),
-        TextField(
-          controller: bodyController,
+        Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: TextField(
+            controller: bodyController,
+          ),
         ),
-        ElevatedButton(
-          onPressed: () {
-            userProvider.createPost(
-                title: titleController.text, body: bodyController.text);
-          },
-          child: Text('Click here'),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ElevatedButton(
+            onPressed: () {
+              userProvider.createPost(
+                  title: titleController.text, body: bodyController.text);
+            },
+            child: Text('Click here'),
+          ),
         ),
       ]),
     );
