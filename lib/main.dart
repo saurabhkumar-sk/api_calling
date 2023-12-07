@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -32,7 +33,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final url = "https://jsonplaceholder.typicode.com/comments";
+  final url = "jsonplaceholder.typicode.com/comments";
+  var data;
 
   @override
   void initState() {
@@ -42,33 +44,34 @@ class _MyHomePageState extends State<MyHomePage> {
 
   getData() async {
     try {
-      var response = await http
-          .get(Uri.http("https://jsonplaceholder.typicode.com", "comments"));
-      log(response.body);
+      var response =
+          await http.get(Uri.http("jsonplaceholder.typicode.com", "comments"));
+      print(response.body);
+      data = jsonDecode(response.body);
+      setState(() {});
     } catch (e) {
-      log(e.toString());
+      print(e.toString());
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Api Call',
-          style: TextStyle(color: Colors.white),
-        ),
-        centerTitle: true,
-        backgroundColor: Colors.blueAccent,
-      ),
-      body: const Center(
-        child: Text(
-          'data',
-          style: TextStyle(
-            fontSize: 25,
+        appBar: AppBar(
+          title: const Text(
+            'Api Call',
+            style: TextStyle(color: Colors.white),
           ),
+          centerTitle: true,
+          backgroundColor: Colors.blueAccent,
         ),
-      ),
-    );
+        body: ListTile(
+          title: Text(
+            data[1].toString(),
+            style: const TextStyle(
+              fontSize: 15,
+            ),
+          ),
+        ));
   }
 }
