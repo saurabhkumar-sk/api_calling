@@ -1,5 +1,5 @@
 import 'package:api/provider/user_post_provider.dart';
-import 'package:api/screen/post_api_screen.dart';
+import 'package:api/screen/get_api_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: const PostApiScreen(),
+        home: const GetAPiScreen(),
       ),
     );
   }

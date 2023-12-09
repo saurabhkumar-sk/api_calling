@@ -58,7 +58,7 @@ class _PostApiScreenState extends State<PostApiScreen> {
               userProvider.createPost(
                   title: titleController.text, body: bodyController.text);
             },
-            child: Text('Click here'),
+            child: const Text('Click here'),
           ),
         ),
       ]),
