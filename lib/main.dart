@@ -1,5 +1,6 @@
 import 'package:api/provider/user_post_provider.dart';
-import 'package:api/screen/get_api_screen.dart';
+import 'package:api/statemanagement/providers/home_screen_provider.dart';
+import 'package:api/statemanagement/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -15,15 +16,22 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => UserProvider()),
+        ChangeNotifierProvider(
+          create: (context) => UserProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => HomeScreenProvider(),
+        )
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: const GetAPiScreen(),
+        // home: const GetAPiScreen(),
+        home: const ProviderHomeScreen(),
       ),
     );
   }
