@@ -1,6 +1,7 @@
 import 'package:api/statemanagement/providers/home_screen_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProviderHomeScreen extends StatefulWidget {
   const ProviderHomeScreen({super.key});
@@ -53,6 +54,18 @@ class _ProviderHomeScreenState extends State<ProviderHomeScreen> {
                     onPressed: provider.appWebView,
                     icon: const Icon(Icons.link),
                     label: const Text("Launch app Web View"),
+                  ),
+                  const SizedBox(height: 30),
+                  TextButton.icon(
+                    onPressed: provider.googlelaunchUrl,
+                    icon: const Icon(Icons.link),
+                    label: const Text("Google"),
+                  ),
+                  const SizedBox(height: 30),
+                  TextButton.icon(
+                    onPressed: provider.webApplaunchUrl,
+                    icon: const Icon(Icons.link),
+                    label: const Text("Launch Url New version"),
                   ),
                 ],
               );

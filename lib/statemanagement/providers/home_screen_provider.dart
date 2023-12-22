@@ -1,14 +1,18 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 final wedSiteUri = Uri.parse("https://pub.dev/packages/url_launcher");
+const String uri = "www.google.com";
+final Uri googlewed = Uri(scheme: "https", host: uri);
 
 class HomeScreenProvider extends ChangeNotifier {
   bool? isEligible;
-  String? eligibilityMessage = '';
+  String? eligibilityMessage = '>=18';
 
   void checkEligibility(int age) {
-    if (age > 18) {
+    if (age >= 18) {
       isEligible = true;
       eligibilityMessage = "You are Eligible";
       notifyListeners();
@@ -19,26 +23,38 @@ class HomeScreenProvider extends ChangeNotifier {
     }
   }
 
+  Future<void> webApplaunchUrl() async {
+    final url = Uri.parse("https://pub.dev/packages/url_launcher");
+
+    if (!await canLaunchUrl(url)) {
+      await launchUrl(url);
+    } else {
+      throw "something Wrong";
+    }
+  }
+
   Future<void> appWebView() async {
-    if (!await canLaunch(wedSiteUri.toString())) {
-      await launch(
-        wedSiteUri.toString(),
-        forceWebView: true,
+    if (!await canLaunchUrl(wedSiteUri)) {
+      await launchUrl(
+        wedSiteUri,
+        mode: LaunchMode.inAppBrowserView,
       );
     }
   }
 
   Future<void> launchUrls() async {
-    if (!await canLaunch(wedSiteUri.toString())) {
-      await launch(wedSiteUri.toString());
+    if (!await canLaunchUrl(wedSiteUri)) {
+      await launchUrl(wedSiteUri);
     } else {
       throw "SomeThing went Wrong";
     }
   }
 
-  Future<void> launchUrl() async {
-    if (!await canLaunchUrl(wedSiteUri)) {
-      throw Exception('Could not launch ');
+  Future<void> googlelaunchUrl() async {
+    if (!await canLaunchUrl(googlewed)) {
+      await launchUrl(googlewed);
+    } else {
+      throw "SomeThing went Wrong";
     }
   }
 }
