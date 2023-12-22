@@ -2,9 +2,14 @@ import 'package:api/statemanagement/providers/home_screen_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class ProviderHomeScreen extends StatelessWidget {
+class ProviderHomeScreen extends StatefulWidget {
   const ProviderHomeScreen({super.key});
 
+  @override
+  State<ProviderHomeScreen> createState() => _ProviderHomeScreenState();
+}
+
+class _ProviderHomeScreenState extends State<ProviderHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -36,6 +41,18 @@ class ProviderHomeScreen extends StatelessWidget {
                     onChanged: (value) {
                       provider.checkEligibility(int.parse(value));
                     },
+                  ),
+                  const SizedBox(height: 30),
+                  TextButton.icon(
+                    onPressed: provider.launchUrls,
+                    icon: const Icon(Icons.link),
+                    label: const Text("Click Here"),
+                  ),
+                  const SizedBox(height: 30),
+                  TextButton.icon(
+                    onPressed: provider.appWebView,
+                    icon: const Icon(Icons.link),
+                    label: const Text("Launch app Web View"),
                   ),
                 ],
               );
